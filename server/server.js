@@ -7,7 +7,7 @@ var port = 5000
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('./routes', routes);
+app.use('/tasklist', routes);
 
 app.listen(port, function() {
     console.log('listening on port', port);

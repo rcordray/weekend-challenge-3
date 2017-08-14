@@ -1,14 +1,25 @@
 {
-    "name": "weekend_todo",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "start": "node server/server.js"
-    },
-    "dependencies": {
-        "body-parser": "^1.17.2",
-        "express": "^4.15.4",
-        "pg": "^7.1.0"
-    }
+  "name": "weekend_todo",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "pg": "^7.1.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcordray/weekend-challenge-3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcordray/weekend-challenge-3/issues"
+  },
+  "homepage": "https://github.com/rcordray/weekend-challenge-3#readme",
+  "description": ""
 }

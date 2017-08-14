@@ -1,6 +1,9 @@
+console.log('JS');
+
+
 $(document).ready(function() {
     console.log('JQ sourced');
-    getTask();
+    listTasks();
     $('#addButton').on('click', function() {
         console.log('add button clicked');
         var nameInput = $('#nameInput').val();
@@ -15,7 +18,7 @@ $(document).ready(function() {
             data: inputObject,
             success: function(response) {
                 console.log(response);
-                getTask();
+                listTasks();
             }
         })
     })
@@ -32,10 +35,11 @@ $(document).ready(function() {
 //     })
 // }
 
-function listTasks(tasklist) {
+function listTasks(taskArray) {
     $('#container').empty();
-    for (var i = 0; i < tasklist.length; i++) {
-        var taskItem = tasklist[i];
+    getTask();
+    for (var i = 0; i < taskArray.length; i++) {
+        var taskItem = taskArray[i];
         var $taskDiv = $('<div></div>');
         $taskDiv.append('<div class="name">' + taskItem.name + '</div>');
         $('#container').prepend($taskDiv)
@@ -44,18 +48,19 @@ function listTasks(tasklist) {
 
 function getTask() {
     $.ajax({
-        url: '/tasklist',
         type: 'GET',
+        url: '/tasklist',
         success: function(data) {
             console.log(data);
-            $('#container').empty();
-            for (var i = 0; i < data.length; i++) {
-                var taskToDisplay = data[i];
-                var $taskRowToDisplay = $('<tr class = "taskRow"></tr>');
-                $taskRowToDisplay.data('id', taskToDisplay.id);
-                $taskRowToDisplay.append('<td class = "taskName">' + taskToDisplay.name + '</td>');
-                $taskRowToDisplay.append('<td class = "koalaAge">' + taskToDisplay.age + '</td>');
-            }
+            listTasks(data)
+                // $('#container').empty();
+                // for (var i = 0; i < data.length; i++) {
+                //     var taskToDisplay = data[i];
+                //     var $taskRowToDisplay = $('<tr class = "taskRow"></tr>');
+                //     $taskRowToDisplay.data('id', taskToDisplay.id);
+                //     $taskRowToDisplay.append('<td class = "taskName">' + taskToDisplay.name + '</td>');
+                //     $taskRowToDisplay.append('<td class = "taskTask">' + taskToDisplay.task + '</td>');
+                // }
             $('#container').append($taskRowToDisplay);
 
         }

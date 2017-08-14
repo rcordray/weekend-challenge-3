@@ -10,14 +10,17 @@ router.get('/', function(req, res) {
             res.sendStatus(500);
         } else {
             client.query('SELECT * FROM tasklist;', function(ErrorMakingTask, result) {
-                done();
-            })
-            if (ErrorMakingTask) {
-                console.log('Error making task', ErrorMakingTask);
-                res.sendStatus(500);
-            } else {
-                res.send(result.rows)
-            }
+                    done();
+
+                    if (ErrorMakingTask) {
+                        console.log('Error making task', ErrorMakingTask);
+                        res.sendStatus(500);
+                    } else {
+                        res.send(result.rows)
+                    }
+                }
+
+            );
         }
     });
 });
@@ -43,4 +46,5 @@ router.post('/', function(req, res) {
 
     })
 })
+
 module.exports = router;
