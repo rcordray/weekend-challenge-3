@@ -3,7 +3,7 @@ console.log('JS');
 
 $(document).ready(function() {
     console.log('JQ sourced');
-    listTasks();
+    getTask();
     $('#addButton').on('click', function() {
         console.log('add button clicked');
         var nameInput = $('#nameInput').val();
@@ -18,7 +18,7 @@ $(document).ready(function() {
             data: inputObject,
             success: function(response) {
                 console.log(response);
-                listTasks();
+                getTask();
             }
         })
     })
@@ -35,16 +35,16 @@ $(document).ready(function() {
 //     })
 // }
 
-function listTasks(taskArray) {
-    $('#container').empty();
-    getTask();
-    for (var i = 0; i < taskArray.length; i++) {
-        var taskItem = taskArray[i];
-        var $taskDiv = $('<div></div>');
-        $taskDiv.append('<div class="name">' + taskItem.name + '</div>');
-        $('#container').prepend($taskDiv)
-    }
-}
+// function listTasks(taskArray) {
+//     $('#container').empty();
+//     getTask();
+//     for (var i = 0; i < taskArray.length; i++) {
+//         var taskItem = taskArray[i];
+//         var $taskDiv = $('<div></div>');
+//         $taskDiv.append('<div class="name">' + taskItem.name + '</div>');
+//         $('#container').prepend($taskDiv)
+//     }
+
 
 function getTask() {
     $.ajax({
@@ -52,16 +52,17 @@ function getTask() {
         url: '/tasklist',
         success: function(data) {
             console.log(data);
-            listTasks(data)
-                // $('#container').empty();
-                // for (var i = 0; i < data.length; i++) {
-                //     var taskToDisplay = data[i];
-                //     var $taskRowToDisplay = $('<tr class = "taskRow"></tr>');
-                //     $taskRowToDisplay.data('id', taskToDisplay.id);
-                //     $taskRowToDisplay.append('<td class = "taskName">' + taskToDisplay.name + '</td>');
-                //     $taskRowToDisplay.append('<td class = "taskTask">' + taskToDisplay.task + '</td>');
-                // }
-            $('#container').append($taskRowToDisplay);
+            // listTasks(data)
+            $('#container').empty();
+            for (var i = 0; i < data.length; i++) {
+                var taskToDisplay = data[i];
+                var $taskRowToDisplay = $('<tr class = "taskRow"></tr>');
+                $taskRowToDisplay.data('id', taskToDisplay.id);
+                $taskRowToDisplay.append('<td class = "taskName">' + taskToDisplay.name + '</td>');
+                $taskRowToDisplay.append('<td class = "taskTask">' + taskToDisplay.task + '</td>');
+                $('#container').append($taskRowToDisplay);
+
+            }
 
         }
     });
