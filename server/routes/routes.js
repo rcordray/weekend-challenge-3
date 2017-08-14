@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../modules/pool');
 
+router.put(':id', function(req, res) {
+    console.log('id of updated task', req.params.id);
+    res.sendStatus(200);
+})
+
 router.get('/', function(req, res) {
     console.log('message get was hit!');
     pool.connect(function(ErrorConnecting, client, done) {

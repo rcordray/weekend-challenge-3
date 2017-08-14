@@ -24,6 +24,10 @@ $(document).ready(function() {
         })
     }) // ajax post complete
 
+$('#container').on('click', '.completeButton', function() {
+    completeTask();
+})
+
 function getTask() {
     $.ajax({
         type: 'GET',
@@ -37,8 +41,8 @@ function getTask() {
                 $taskRowToDisplay.data('id', taskToDisplay.id);
                 $taskRowToDisplay.append('<td class = "taskName">' + taskToDisplay.name + '</td>');
                 $taskRowToDisplay.append('<td class = "taskTask">' + taskToDisplay.task + '</td>');
-                $taskRowToDisplay.append('<button id="completeButton">Completed!</button>')
-                $taskRowToDisplay.append('<button id="deleteButton">Delete!</button>')
+                $taskRowToDisplay.append('<button class="completeButton">Completed!</button>')
+                $taskRowToDisplay.append('<button class="deleteButton">Delete!</button>')
 
                 $('#container').append($taskRowToDisplay);
 
@@ -47,3 +51,20 @@ function getTask() {
         }
     });
 } // ajax get complete
+
+function completeTask() {
+    console.log('task is complete');
+    var taskId = $(this).parent().data('id');
+    $.ajax({
+        method: 'PUT',
+        url: '/tasklist/' + taskId,
+        success: function(response) {
+            getTask();
+        },
+        error: function(response) {
+            console.log('error updating task');
+
+        }
+    })
+
+}
